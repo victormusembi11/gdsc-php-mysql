@@ -1,5 +1,7 @@
 <?php
 
+include __DIR__ . "/../db_conn.php";
+
 $username = $_POST["username"];
 $email = $_POST["email"];
 $password = $_POST["password"];
@@ -53,9 +55,26 @@ if ($email_validator[0] == false) {
     $form_status = false;
 }
 
+
+// check if email & password match exists in the database
+
+$sql = "SELECT * FROM Users WHERE EmailAddress='$email' AND Password='$password'";
+$result = $conn->query($sql);
+
+
+if ($result->num_rows > 0) {
+    echo "user exists";
+} else {
+    $form_errors .= "&invalid_cred=Email or password is incorrect";
+    $form_status = false;
+}
+
+
 if ($form_status) {
+    // redirect to success.php when the form is valid
     header("Location: success.php");
     exit();
 } else {
+    // redirect back to form.php with errors
     header("Location: form.php$form_errors$form_data");
 }

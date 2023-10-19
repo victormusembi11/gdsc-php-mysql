@@ -1,5 +1,7 @@
 <?php
 
+$invalid_cred = $_GET["invalid_cred"] ?? null;
+
 $username_error = $_GET["username_error"] ?? null;
 $email_error = $_GET["email_error"] ?? null;
 
@@ -24,6 +26,12 @@ $email = $_GET["email"] ?? null;
 
     <div class="container">
         <h1>Login</h1>
+
+        <?php if ($invalid_cred) { ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $invalid_cred ?>
+            </div>
+        <?php } ?>
 
         <form action="proc.php" method="post" novalidate>
             <!-- Username Input -->
