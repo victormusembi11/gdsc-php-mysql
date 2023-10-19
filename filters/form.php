@@ -20,7 +20,11 @@ $email = $_GET["email"] ?? null;
 
 <body>
 
+
+
     <div class="container">
+        <h1>Login</h1>
+
         <form action="proc.php" method="post" novalidate>
             <!-- Username Input -->
             <div class="mb-3">

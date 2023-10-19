@@ -17,7 +17,7 @@ function validate_username($username)
         return false;
     }
 
-    return true;
+    return array(true, null);
 }
 
 function validate_email($email)
@@ -28,7 +28,7 @@ function validate_email($email)
         return array(false, "Email is invalid");
     }
 
-    return true;
+    return array(true, null);
 }
 
 // if the form is valid the status is true, else it's false
@@ -40,6 +40,7 @@ $form_data = "&username=$username&email=$email";
 $user_validator = validate_username($username);
 
 if ($user_validator[0] == false) {
+    echo "invalid username";
     $form_errors .= "username_error=" . $user_validator[1];
     $form_status = false;
 }
@@ -47,6 +48,7 @@ if ($user_validator[0] == false) {
 $email_validator = validate_email($email);
 
 if ($email_validator[0] == false) {
+    echo "invalid email";
     $form_errors .= "&email_error=" . $email_validator[1];
     $form_status = false;
 }
