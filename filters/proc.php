@@ -42,7 +42,6 @@ $form_data = "&username=$username&email=$email";
 $user_validator = validate_username($username);
 
 if ($user_validator[0] == false) {
-    echo "invalid username";
     $form_errors .= "username_error=" . $user_validator[1];
     $form_status = false;
 }
@@ -50,7 +49,6 @@ if ($user_validator[0] == false) {
 $email_validator = validate_email($email);
 
 if ($email_validator[0] == false) {
-    echo "invalid email";
     $form_errors .= "&email_error=" . $email_validator[1];
     $form_status = false;
 }
@@ -71,6 +69,9 @@ if ($result->num_rows > 0) {
 
 
 if ($form_status) {
+    // set cookie
+    setcookie("user", $email . "." . $password, time() + 3600, "/");
+
     // redirect to success.php when the form is valid
     header("Location: success.php");
     exit();
