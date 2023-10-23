@@ -2,6 +2,8 @@
 
 include __DIR__ . "/../db_conn.php";
 
+session_start();
+
 $username = $_POST["username"];
 $email = $_POST["email"];
 $password = $_POST["password"];
@@ -71,6 +73,8 @@ if ($result->num_rows > 0) {
 if ($form_status) {
     // set cookie
     setcookie("user", $email . "." . $password, time() + 3600, "/");
+
+    $_SESSION["greeting"] = "Hello " . $username;
 
     // redirect to success.php when the form is valid
     header("Location: success.php");
