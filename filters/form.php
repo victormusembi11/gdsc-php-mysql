@@ -27,6 +27,7 @@ $email = $_GET["email"] ?? null;
     <div class="container">
         <h1>Login</h1>
 
+        <!-- If error message then render -->
         <?php if ($invalid_cred) { ?>
             <div class="alert alert-danger" role="alert">
                 <?php echo $invalid_cred ?>
